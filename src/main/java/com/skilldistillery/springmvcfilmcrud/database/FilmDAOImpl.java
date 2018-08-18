@@ -98,4 +98,67 @@ public class FilmDAOImpl implements FilmDAO{
 		}
 		return films;
 	}
+	
+	public Film editFilm(Film f) {
+		String sql = "UPDATE film\n" + 
+				"SET id = ?, " + 
+				"SET title = ?, " +
+				"SET description = ?, " +
+				"SET release_year = ?, " +
+				"SET language_id = ?, " +
+				"SET rental_duration = ?, " +
+				"SET rental_rate = ?, " + 
+				"SET length = ?, " +
+				"SET replacement_cost = ?, " +
+				"SET rating = ?, " +
+				"SET special_features = ?, " +
+				"SET language = ?, "; 
+		try {
+			Connection conn = DriverManager.getConnection(url, user, pass);
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, f.getId());
+			stmt.setString(2, f.getTitle());
+			stmt.setString(3, f.getDescription());
+			stmt.setInt(4, f.getReleaseYear());
+			stmt.setInt(5, f.getLanguageId());
+			stmt.setInt(6, f.getRentalDuration());
+			stmt.setDouble(7, f.getRentalRate());
+			stmt.setInt(8, f.getLength());
+			stmt.setDouble(9, f.getReplacementCost());
+			stmt.setString(10, f.getRating());
+			stmt.setInt(1, f.getId());
+			stmt.setInt(1, f.getId());
+			int rowsAffected = stmt.executeUpdate();
+			if (rowsAffected == 1) {
+				f = new Film(); 
+				
+			}
+			filmResult.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return f; 
+	}
+	
+	public void deleteFilm(Film f) {
+		String sql = "SELECT film.id, title, description, release_year, language_id, rental_duration,\n" + 
+				"       rental_rate, length, replacement_cost, rating, special_features, name\n" + 
+				"FROM film\n" + 
+				"JOIN language\n" + 
+				"ON film.language_id = language.id\n" + 
+				"WHERE film.id = ?";
+		try {
+			Connection conn = DriverManager.getConnection(url, user, pass);
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.set(1, filmId);
+			ResultSet filmResult = stmt.executeQuery();
+			filmResult.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

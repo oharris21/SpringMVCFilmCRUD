@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SpringMVCFilmCrud Project</title>
 </head>
 <body>
+
+<h3>Film Information</h3>
+${film}
 
 </body>
 </html>

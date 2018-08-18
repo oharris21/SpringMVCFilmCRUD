@@ -36,5 +36,13 @@ public class FilmController {
 
 		return mv;
 	}
+	
+	@RequestMapping(path = "searchFilmByKeyword.do", params = "searchFilmByKeyword", method = RequestMethod.GET)
+	public ModelAndView searchFilmByKeyword(@RequestParam("searchFilmByKeyword") String keyword) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("view");
+		mv.addObject("film", dao.findFilmByKeyword(keyword));
+		return mv;
+	}
 
 }

@@ -26,26 +26,36 @@
 				<td>${f.language}</td>
 				<td>
 					<form action="Details.do" method="GET">
-						<input type="submit" value="Details"> <input type="hidden"
-							name="id" value="${f.id}"> <input type="hidden"
-							name="releaseYear" value="${f.releaseYear}"> <input
-							type="hidden" name="rating" value="${f.rating}"> <input
-							type="hidden" name="length" value="${f.length}"> <input
-							type="hidden" name="language" value="${f.language}"> <input
-							type="hidden" name="description" value="${f.description}">
+						<input type="submit" value="Details"> 
+						<input type="hidden" name="id" value="${f.id}"> 
+						<input type="hidden" name="releaseYear" value="${f.releaseYear}"> 
+						<input type="hidden" name="rating" value="${f.rating}">
+						<input type="hidden" name="length" value="${f.length}"> 
+						<input type="hidden" name="language" value="${f.language}"> 
+						<input type="hidden" name="description" value="${f.description}">
 						<input type="hidden" name="languageId" value="${f.languageId}">
-						<input type="hidden" name="rentalDuration"
-							value="${f.rentalDuration}"> <input type="hidden"
-							name="rentalRate" value="${f.rentalRate}"> <input
-							type="hidden" name="replacementCost" value="${f.replacementCost}">
-						<input type="hidden" name="specialFeatures"
-							value="${f.specialFeatures}"> <input type="hidden"
-							name="title" value="${f.title}">
+						<input type="hidden" name="rentalDuration" value="${f.rentalDuration}"> 
+						<input type="hidden" name="rentalRate" value="${f.rentalRate}"> 
+						<input type="hidden" name="replacementCost" value="${f.replacementCost}">
+						<input type="hidden" name="specialFeatures" value="${f.specialFeatures}"> 
+						<input type="hidden" name="title" value="${f.title}">
 					</form>
 				</td>
 				<td>
-					<form action="Edit.do" method="POST">
+					<form action="RouteToEdit.do" method="GET">
 						<input type="submit" value="Edit">
+						<input type="hidden" name="id" value="${f.id}"> 
+						<input type="hidden" name="releaseYear" value="${f.releaseYear}"> 
+						<input type="hidden" name="rating" value="${f.rating}">
+						<input type="hidden" name="length" value="${f.length}"> 
+						<input type="hidden" name="language" value="${f.language}"> 
+						<input type="hidden" name="description" value="${f.description}">
+						<input type="hidden" name="languageId" value="${f.languageId}">
+						<input type="hidden" name="rentalDuration" value="${f.rentalDuration}"> 
+						<input type="hidden" name="rentalRate" value="${f.rentalRate}"> 
+						<input type="hidden" name="replacementCost" value="${f.replacementCost}">
+						<input type="hidden" name="specialFeatures" value="${f.specialFeatures}"> 
+						<input type="hidden" name="title" value="${f.title}">
 					</form>
 				</td>
 				<td>

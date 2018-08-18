@@ -57,10 +57,18 @@ public class FilmController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "Edit.do", params = "edit", method = RequestMethod.POST)
-	public ModelAndView editFilm(@RequestParam("edit") Film f) {
+	@RequestMapping(path = "Edit.do", method = RequestMethod.POST)
+	public ModelAndView editFilm(Film f) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("view");
+		mv.setViewName("EditFilm");
+		mv.addObject("film", f);
+		return mv;
+	}
+	
+	@RequestMapping(path = "RouteToEdit.do", method = RequestMethod.GET)
+	public ModelAndView routeToEditFilm(Film f) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("EditFilm");
 		mv.addObject("film", f);
 		return mv;
 	}

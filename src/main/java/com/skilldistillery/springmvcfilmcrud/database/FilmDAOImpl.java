@@ -99,7 +99,8 @@ public class FilmDAOImpl implements FilmDAO{
 		return films;
 	}
 	
-	public Film editFilm(Film f) {
+	public Boolean editFilm(Film f) {
+		Boolean edit = false; 
 		String sql = "UPDATE film\n" + 
 				"SET id = ?, " + 
 				"SET title = ?, " +
@@ -112,7 +113,19 @@ public class FilmDAOImpl implements FilmDAO{
 				"SET replacement_cost = ?, " +
 				"SET rating = ?, " +
 				"SET special_features = ?, " +
-				"SET language = ?, "; 
+				"SET language = ?, " + 
+				"WHERE id = ?, " + 
+				"WHERE title = ?, " +
+				"WHERE description = ?, " +
+				"WHERE release_year = ?, " +
+				"WHERE language_id = ?, " +
+				"WHERE rental_duration = ?, " +
+				"WHERE rental_rate = ?, " + 
+				"WHERE length = ?, " +
+				"WHERE replacement_cost = ?, " +
+				"WHERE rating = ?, " +
+				"WHERE special_features = ?, " +
+				"WHERE language = ?, ";
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -126,20 +139,21 @@ public class FilmDAOImpl implements FilmDAO{
 			stmt.setInt(8, f.getLength());
 			stmt.setDouble(9, f.getReplacementCost());
 			stmt.setString(10, f.getRating());
-			stmt.setInt(1, f.getId());
-			stmt.setInt(1, f.getId());
+			stmt.setString(11, f.getSpecialFeatures());
+			stmt.setString(12, f.getLanguage());
 			int rowsAffected = stmt.executeUpdate();
-			if (rowsAffected == 1) {
-				f = new Film(); 
-				
+			if (rowsAffected > 0) {
+				edit = true; 
 			}
-			filmResult.close();
+			else {
+				edit = false; 
+			}
 			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return f; 
+		return edit; 
 	}
 	
 	public void deleteFilm(Film f) {

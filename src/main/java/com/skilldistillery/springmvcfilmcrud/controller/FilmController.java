@@ -49,8 +49,8 @@ public class FilmController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "Details.do", params = "details", method = RequestMethod.GET)
-	public ModelAndView filmDetails(@RequestParam("details") Film f) {
+	@RequestMapping(path = "Details.do", method = RequestMethod.GET)
+	public ModelAndView filmDetails(Film f) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("view");
 		mv.addObject("film", f);

@@ -145,13 +145,13 @@ public class Film {
 		this.actors = actors;
 	}
 
-	@Override
-	public String toString() {
-		return "Film [id=" + id + "<br>title=" + title + "<br>description=" + description + "<br>releaseYear=" + releaseYear
-				+ "\nlanguageId=" + languageId + "\nrentalDuration=" + rentalDuration + "\nrentalRate=" + rentalRate
-				+ "\nlength=" + length + "\nreplacementCost=" + replacementCost + "\nrating=" + rating
-				+ "\nspecialFeatures=" + specialFeatures + "\nlanguage=" + language + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Film [id=" + id + "<br>title=" + title + "<br>description=" + description + "<br>releaseYear=" + releaseYear
+//				+ "\nlanguageId=" + languageId + "\nrentalDuration=" + rentalDuration + "\nrentalRate=" + rentalRate
+//				+ "\nlength=" + length + "\nreplacementCost=" + replacementCost + "\nrating=" + rating
+//				+ "\nspecialFeatures=" + specialFeatures + "\nlanguage=" + language + "]";
+//	}
 
 	@Override
 	public int hashCode() {

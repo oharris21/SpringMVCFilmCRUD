@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import com.skilldistillery.springmvcfilmcrud.entities.Film;
 
 public class FilmDAOImpl implements FilmDAO{
-	private static String url = "jdbc:mysql://localhost:3306/historydb";
+	private static String url = "jdbc:mysql://localhost:3306/sdvid";
 	private final String user = "student";
 	private final String pass = "student";
 	

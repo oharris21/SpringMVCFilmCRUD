@@ -15,8 +15,8 @@ public class FilmController {
 	@Autowired
 	private FilmDAO dao;
 
-	public void setFilmDAO(FilmDAO filmDAO) {
-		dao = filmDAO;
+	public void setFilmDAO(FilmDAO dao) {
+		this.dao = dao;
 	}
 
 	public FilmDAO getDao() {

@@ -48,7 +48,7 @@ public class FilmController {
 		mv.addObject("film", dao.findFilmByKeyword(keyword));
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "Details.do", method = RequestMethod.GET)
 	public ModelAndView filmDetails(Film f) {
 		ModelAndView mv = new ModelAndView();
@@ -56,7 +56,7 @@ public class FilmController {
 		mv.addObject("film", f);
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "Edit.do", params = "edit", method = RequestMethod.POST)
 	public ModelAndView editFilm(@RequestParam("edit") Film f) {
 		ModelAndView mv = new ModelAndView();
@@ -64,7 +64,7 @@ public class FilmController {
 		mv.addObject("film", f);
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "Delete.do", params = "delete", method = RequestMethod.POST)
 	public ModelAndView deleteFilm(@RequestParam("delete") Film f) {
 		ModelAndView mv = new ModelAndView();
@@ -72,7 +72,21 @@ public class FilmController {
 		mv.addObject("film", f);
 		return mv;
 	}
-	
-	
+
+	@RequestMapping(path = "addFilm.do", method = RequestMethod.POST)
+	public ModelAndView addFilm(Film f) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("view");
+		Film addedFilm = dao.addFilmToDB(f);
+		String successful = "Film addition successful";
+		String failed = "Film addition failed";
+		if (addedFilm != null) {
+			mv.addObject("film", addedFilm);
+			mv.addObject("successful", successful);
+		} else if (addedFilm == null) {
+			mv.addObject("failed", failed);
+		}
+		return mv;
+	}
 
 }

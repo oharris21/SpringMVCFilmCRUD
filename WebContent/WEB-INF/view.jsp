@@ -11,6 +11,17 @@
 
 	<h2>SpringMVCFilmCrud Project | Film Details</h2>
 
+	<!-- This will print a "successful" header when a user adds a film
+	followed by the film details, so that the user will know that a film
+	was added successfully (when they use the addFilm.html form inputs -->
+	<c:if test="${! empty successful}">
+		<h2>${successful}</h2>
+	</c:if>
+	<!--  Same as above except for failure -->
+	<c:if test="${! empty failed}">
+		<h2>${failed}</h2>
+	</c:if>
+	
 	<table>
 
 		<tr>

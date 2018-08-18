@@ -156,23 +156,23 @@ public class FilmDAOImpl implements FilmDAO{
 		return edit; 
 	}
 	
-	public void deleteFilm(Film f) {
-		String sql = "SELECT film.id, title, description, release_year, language_id, rental_duration,\n" + 
-				"       rental_rate, length, replacement_cost, rating, special_features, name\n" + 
-				"FROM film\n" + 
-				"JOIN language\n" + 
-				"ON film.language_id = language.id\n" + 
-				"WHERE film.id = ?";
-		try {
-			Connection conn = DriverManager.getConnection(url, user, pass);
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.set(1, filmId);
-			ResultSet filmResult = stmt.executeQuery();
-			filmResult.close();
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void deleteFilm(Film f) {
+//		String sql = "SELECT film.id, title, description, release_year, language_id, rental_duration,\n" + 
+//				"       rental_rate, length, replacement_cost, rating, special_features, name\n" + 
+//				"FROM film\n" + 
+//				"JOIN language\n" + 
+//				"ON film.language_id = language.id\n" + 
+//				"WHERE film.id = ?";
+//		try {
+//			Connection conn = DriverManager.getConnection(url, user, pass);
+//			PreparedStatement stmt = conn.prepareStatement(sql);
+//			stmt.set(1, filmId);
+//			ResultSet filmResult = stmt.executeQuery();
+//			filmResult.close();
+//			stmt.close();
+//			conn.close();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

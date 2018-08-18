@@ -62,6 +62,7 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("EditFilm");
 		mv.addObject("film", f);
+		// calls method in FilmDAOImpl that edits film
 		return mv;
 	}
 	
@@ -73,14 +74,18 @@ public class FilmController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "Delete.do", params = "delete", method = RequestMethod.POST)
-	public ModelAndView deleteFilm(@RequestParam("delete") Film f) {
+	@RequestMapping(path = "Delete.do", method = RequestMethod.POST)
+	public ModelAndView deleteFilm(Film f) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("view");
-		mv.addObject("film", f);
+		mv.setViewName("confirmationDelete");
+		// calls method in FilmDAOImpl that deletes film 
 		return mv;
 	}
 	
-	
-
+	@RequestMapping(path = "RouteToDelete.do", method = RequestMethod.GET)
+	public ModelAndView routeToDelete(Film f) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("confirmationDelete");
+		return mv;
+	}
 }

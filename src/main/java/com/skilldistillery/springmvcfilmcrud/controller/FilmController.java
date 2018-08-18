@@ -36,7 +36,10 @@ public class FilmController {
 
 		return mv;
 	}
-	
+
+	// This method will use the action "searchFilmByKeyword.do" via
+	// ./WebContent/searchFilmByKeyword.html and retrieve a *list* of films
+	// associated with the key "film" to display on our view.jsp page
 	@RequestMapping(path = "searchFilmByKeyword.do", params = "searchFilmByKeyword", method = RequestMethod.GET)
 	public ModelAndView searchFilmByKeyword(@RequestParam("searchFilmByKeyword") String keyword) {
 		ModelAndView mv = new ModelAndView();

@@ -61,6 +61,7 @@
 				</td>
 				<td>
 					<form action="Delete.do" method="POST">
+						<input type="hidden" name="id" value="${f.id}">
 						<input type="submit" value="Delete">
 					</form>
 				</td>

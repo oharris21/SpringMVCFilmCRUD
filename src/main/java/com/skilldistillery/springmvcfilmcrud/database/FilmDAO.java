@@ -9,4 +9,5 @@ public interface FilmDAO {
 	public List<Film> findFilmByKeyword(String keyword); 
 	public Film addFilmToDB(Film film);
 	public boolean editFilm(Film f); 
+	public boolean deleteFilm(int filmId);
 }

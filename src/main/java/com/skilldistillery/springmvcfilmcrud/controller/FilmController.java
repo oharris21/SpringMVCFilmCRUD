@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.springmvcfilmcrud.database.FilmDAO;
 import com.skilldistillery.springmvcfilmcrud.entities.Film;
@@ -84,42 +85,35 @@ public class FilmController {
 		return mv;
 	}
 
-	// CORRESPONDS TO *FilmList.jsp*
-	@RequestMapping(path = "Delete.do", method = RequestMethod.POST)
-	public ModelAndView deleteFilm(Film f) {
+	// CORRESPONDS TO *FilmList.jsp, view.jsp*
+	@RequestMapping(path = "Delete.do", params = "id", method = RequestMethod.POST)
+	public ModelAndView deleteFilm(@RequestParam("id") int filmId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("confirmationDelete");
-		// calls method in FilmDAOImpl that deletes film
+		
+		// This line is here because we use the filmId that is passed in
+		// to retrieve a film object so that we can set a key for the film
+		// corresponding to the id. We set this key because we want to be 
+		// able to retrieve the film's title, so that we can display to
+		// the user which film was or was not deleted on confirmationDelete.jsp
+		Film filmPropertiesToDisplayOnPage = dao.searchFilmById(filmId);
+		
+		boolean wasDeleteSuccessful = dao.deleteFilm(filmId);
+		
+		redir.addFlashAttribute("title", filmPropertiesToDisplayOnPage.getTitle());
+		redir.addFlashAttribute("condition", wasDeleteSuccessful);
+		
+		mv.setViewName("redirect:redirectDelete.do");
 		return mv;
 	}
-
-	// Commented out this method. *To be deleted?*
-	// Message:
-	// I don't think we need this method because when the user clicks on the 
-	// delete button, that request mapping should jump to a delete method
-	// which utilizes the FilmDAOImpl object method to delete the passed in
-	// film object. The view in the controller delete method which calls the 
-	// FilmDAOImpl delete method can just simply point to a page where
-	// the user will get a confirmation that the method was deleted.
-	// Perhaps this page will also contain the details of the film which
-	// was just deleted. 
-	//
-	// The only reason that there is a "RouteToEdit.do" mapping for a method
-	// in the controller is because when the user clicks the edit button
-	// they need to get to a page where they can see form values for the 
-	// film they wish to edit pre-populated, so they know what they can
-	// change. Furthermore, the submit button on *that* page should be the 
-	// one which actually calls the controller method which calls the 
-	// FilmDAOImpl class' UPDATE film (aka edit) method. 
-	// *** START METHOD ***
-//	@RequestMapping(path = "RouteToDelete.do", method = RequestMethod.GET)
-//	public ModelAndView routeToDelete(Film f) {
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("confirmationDelete");
-//		return mv;
-//	}
-	// *** END METHOD ***
-
+	
+	// CORRESPONDS TO *deleteFilm() redirect*
+	@RequestMapping(path = "redirectDelete.do", method = RequestMethod.GET)
+	public ModelAndView deleteFilmRedirect() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("confirmationDelete");
+		return mv;
+	}
+	
 	// CORRESPONDS TO *addFilm.html*
 	@RequestMapping(path = "addFilm.do", method = RequestMethod.POST)
 	public ModelAndView addFilm(Film f) {

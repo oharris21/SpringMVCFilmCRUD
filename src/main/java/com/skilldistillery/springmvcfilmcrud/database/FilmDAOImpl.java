@@ -145,25 +145,54 @@ public class FilmDAOImpl implements FilmDAO {
 		return edit;
 	}
 
-//	public void deleteFilm(Film f) {
-//		String sql = "SELECT film.id, title, description, release_year, language_id, rental_duration,\n" + 
-//				"       rental_rate, length, replacement_cost, rating, special_features, name\n" + 
-//				"FROM film\n" + 
-//				"JOIN language\n" + 
-//				"ON film.language_id = language.id\n" + 
-//				"WHERE film.id = ?";
-//		try {
-//			Connection conn = DriverManager.getConnection(url, user, pass);
-//			PreparedStatement stmt = conn.prepareStatement(sql);
-//			stmt.set(1, filmId);
-//			ResultSet filmResult = stmt.executeQuery();
-//			filmResult.close();
-//			stmt.close();
-//			conn.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	@Override
+	public boolean deleteFilm(int filmId) {
+		
+		Connection conn = null;
+		
+		try {
+			
+			conn = DriverManager.getConnection(url, user, pass);
+			conn.setAutoCommit(false);
+			
+			String sql = "DELETE FROM film WHERE film.id = ?";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setInt(1, filmId);
+			
+			int updateCount = stmt.executeUpdate();
+			
+			if (updateCount == 1) {
+				System.out.println("Film successfully deleted from "
+						+ "database.");
+				return true;
+			}
+			
+			conn.commit();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+			if (conn != null) {
+				try {
+					
+					conn.rollback();
+					
+				} catch (SQLException e2) {
+					
+					System.err.println("Error trying to rollback");
+					
+				}
+			}
+			
+		}
+		// This will occur only if updateCount != 1, i.e. if the 
+		// query command was unable to delete the film from the DB
+		return false;
+	}
 
 	@Override
 	public Film addFilmToDB(Film film) {

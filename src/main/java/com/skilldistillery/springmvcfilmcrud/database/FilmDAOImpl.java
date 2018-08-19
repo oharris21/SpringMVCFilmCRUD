@@ -13,7 +13,7 @@ import com.skilldistillery.springmvcfilmcrud.entities.Actor;
 import com.skilldistillery.springmvcfilmcrud.entities.Film;
 
 public class FilmDAOImpl implements FilmDAO {
-	private static String url = "jdbc:mysql://localhost:3306/sdvid";
+	private static String url = "jdbc:mysql://localhost:3306/sdvid?useSSL=false";
 	private final String user = "student";
 	private final String pass = "student";
 
@@ -56,7 +56,6 @@ public class FilmDAOImpl implements FilmDAO {
 		return f;
 	}
 
-	// keyword search in database
 	@Override
 	public List<Film> findFilmByKeyword(String keyword) {
 		List<Film> films = new ArrayList<>();
@@ -96,36 +95,43 @@ public class FilmDAOImpl implements FilmDAO {
 		return films;
 	}
 
+	@Override
 	public boolean editFilm(Film f) {
 		Connection conn = null;
 		Boolean edit = false;
-		String sql = "update film set id = ?, title = ?, description = ?, release_year = ?, language_id = ?, "
+		String sql = "UPDATE film SET title = ?, description = ?, release_year = ?, language_id = ?, "
 				+ "rental_duration = ?, rental_rate = ?, length = ?, replacement_cost = ?, rating = ?, special_features = ? "
 				+ "where id = ?; ";
+		
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
+			conn.setAutoCommit(false);
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, f.getId());
-			stmt.setString(2, f.getTitle());
-			stmt.setString(3, f.getDescription());
-			stmt.setInt(4, f.getReleaseYear());
-			stmt.setInt(5, f.getLanguageId());
-			stmt.setInt(6, f.getRentalDuration());
-			stmt.setDouble(7, f.getRentalRate());
-			stmt.setInt(8, f.getLength());
-			stmt.setDouble(9, f.getReplacementCost());
-			stmt.setString(10, f.getRating());
-			stmt.setInt(11, Integer.parseInt(f.getSpecialFeatures()));
+			stmt.setString(1, f.getTitle());
+			stmt.setString(2, f.getDescription());
+			stmt.setInt(3, f.getReleaseYear());
+			stmt.setInt(4, f.getLanguageId());
+			stmt.setInt(5, f.getRentalDuration());
+			stmt.setDouble(6, f.getRentalRate());
+			stmt.setInt(7, f.getLength());
+			stmt.setDouble(8, f.getReplacementCost());
+			stmt.setString(9, f.getRating());
+			stmt.setString(10, f.getSpecialFeatures());
+			stmt.setInt(11, f.getId());
 			int rowsAffected = stmt.executeUpdate();
+			System.out.println(rowsAffected);
 			if (rowsAffected > 0) {
 				edit = true;
 			} else {
 				edit = false;
 			}
+			conn.commit();
 			stmt.close();
 			conn.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 			if (conn != null) {
 				try {
 					conn.rollback();
@@ -133,7 +139,9 @@ public class FilmDAOImpl implements FilmDAO {
 					System.err.println("Error trying to rollback");
 				}
 			}
+			
 		}
+		
 		return edit;
 	}
 
@@ -166,7 +174,11 @@ public class FilmDAOImpl implements FilmDAO {
 			conn = DriverManager.getConnection(url, user, pass);
 			conn.setAutoCommit(false);
 
-			String sql = "INSERT INTO film (film.title, film.description, film.release_year, film.language_id, film.rental_duration, film.rental_rate, film.length, film.replacement_cost, film.rating, film.special_features) "
+			String sql = "INSERT INTO film (film.title, film.description,"
+					+ " film.release_year, film.language_id,"
+					+ " film.rental_duration, film.rental_rate,"
+					+ " film.length, film.replacement_cost, film.rating,"
+					+ " film.special_features) "
 					+ " VALUES (?,?,?,?,?,?,?,?,?,?)";
 
 			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -180,7 +192,7 @@ public class FilmDAOImpl implements FilmDAO {
 			stmt.setInt(7, film.getLength());
 			stmt.setDouble(8, film.getReplacementCost());
 			stmt.setString(9, film.getRating());
-			stmt.setInt(10, Integer.parseInt(film.getSpecialFeatures()));
+			stmt.setString(10, film.getSpecialFeatures());
 
 			int updateCount = stmt.executeUpdate();
 			if (updateCount == 1) {

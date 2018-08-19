@@ -5,19 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SpringMVCFilmCrud | Edit Confirmation</title>
+<title>SpringMVCFilmCrud Project | Edit Confirmation</title>
 </head>
 <body>
-	<h2>SpringMVCFilmCrud | Edit Confirmation</h2>
+	<h2>SpringMVCFilmCrud Project | Edit Confirmation</h2>
+
 	<c:choose>
-		<c:when test="${booleanEdit}">
-			Edit successful
+		<c:when test="${editBoolean}">
+			<h3>Edit successful</h3>
 		</c:when>
 		<c:otherwise>
-			Edit failed
+			<h3>Edit failed</h3>
 		</c:otherwise>
 	</c:choose>
-
 
 	<table>
 
@@ -68,10 +68,6 @@
 		code)  -->
 			<td>Special Features:</td>
 			<td>${film.specialFeatures}</td>
-		</tr>
-		<tr>
-			<td>Language:</td>
-			<td>${film.language}</td>
 		</tr>
 		<tr>
 			<td>Actor List:</td>

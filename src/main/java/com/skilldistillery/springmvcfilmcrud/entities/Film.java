@@ -5,22 +5,23 @@ import java.util.List;
 
 public class Film {
 	private int id;
-	private String title; 
-	private String description; 
+	private String title;
+	private String description;
 	private int releaseYear;
-	private int languageId; 
-	private int rentalDuration; 
-	private double rentalRate; 
+	private int languageId;
+	private int rentalDuration;
+	private double rentalRate;
 	private int length;
 	private double replacementCost;
-	private String rating; 
+	private String rating;
 	private String specialFeatures;
-	private String language; 
-	private List<Actor> actors = new ArrayList<>(); 
+	private String language;
+
 	// list of actors is not present in the constructor or toString
-	
+	private List<Actor> actors = new ArrayList<>();
+
 	public Film() {
-		
+
 	}
 
 	public Film(int id, String title, String description, int releaseYear, int languageId, int rentalDuration,

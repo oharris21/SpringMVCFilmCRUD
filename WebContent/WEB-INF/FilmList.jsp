@@ -5,9 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SpringMVCFilmCrud Project | Film List</title>
 </head>
 <body>
+	<h2>SpringMVCFilmCrud Project | Film List</h2>
 	<h3>Film Information</h3>
 	<table>
 		<tr>

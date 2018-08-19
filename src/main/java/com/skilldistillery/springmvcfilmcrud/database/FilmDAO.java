@@ -2,6 +2,7 @@ package com.skilldistillery.springmvcfilmcrud.database;
 
 import java.util.List;
 
+import com.skilldistillery.springmvcfilmcrud.entities.Actor;
 import com.skilldistillery.springmvcfilmcrud.entities.Film;
 
 public interface FilmDAO {
@@ -10,4 +11,6 @@ public interface FilmDAO {
 	public Film addFilmToDB(Film film);
 	public boolean editFilm(Film f); 
 	public boolean deleteFilm(int filmId);
+	List<Actor> getActorsByFilmId(int filmId);
+	public String findCategoryByFilmId(int id);
 }

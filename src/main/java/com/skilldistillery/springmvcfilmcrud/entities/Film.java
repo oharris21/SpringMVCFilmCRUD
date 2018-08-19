@@ -3,6 +3,8 @@ package com.skilldistillery.springmvcfilmcrud.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.skilldistillery.springmvcfilmcrud.database.FilmDAOImpl;
+
 public class Film {
 	private int id;
 	private String title;

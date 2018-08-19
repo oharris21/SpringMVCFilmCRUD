@@ -263,4 +263,57 @@ public class FilmDAOImpl implements FilmDAO {
 
 		return film;
 	}
+	
+	public String findCategoryByFilmId (int filmId) {
+		String category = null;
+		try {
+			Connection conn = DriverManager.getConnection(url, user, pass);
+			String sql = "SELECT category.name\n" + 
+					"FROM film \n" + 
+					"JOIN film_category\n" + 
+					"ON film.id = film_category.film_id\n" + 
+					"JOIN category \n" + 
+					"ON film_category.category_id = category.id \n" + 
+					"WHERE film.id like ?";
+			PreparedStatement stmt = conn.prepareStatement(sql); 
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery(); 
+			while (rs.next()) {
+				category = rs.getString(1);
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return category; 
+	}
+	
+	@Override
+	public List<Actor> getActorsByFilmId(int filmId) {
+		List<Actor> actors = new ArrayList<>();
+		try {
+			Connection conn = DriverManager.getConnection(url, user, pass);
+			String sql = "SELECT a.id, a.first_name, a.last_name \n"
+			+ "FROM actor a\n" + "JOIN film_actor fa\n"
+					+ "ON a.id = fa.actor_id WHERE fa.film_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				int actorId = rs.getInt(1);
+				String firstName = rs.getString(2);
+				String lastName = rs.getString(3);
+				Actor actor = new Actor(actorId, firstName, lastName);
+				actors.add(actor);
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return actors;
+	}
 }

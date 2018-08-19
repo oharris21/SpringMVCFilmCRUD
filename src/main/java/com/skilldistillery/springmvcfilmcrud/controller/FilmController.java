@@ -1,5 +1,7 @@
 package com.skilldistillery.springmvcfilmcrud.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.springmvcfilmcrud.database.FilmDAO;
+import com.skilldistillery.springmvcfilmcrud.entities.Actor;
 import com.skilldistillery.springmvcfilmcrud.entities.Film;
 
 @Controller
@@ -58,6 +61,25 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("view");
 		mv.addObject("film", f);
+		return mv;
+	}
+	
+	@RequestMapping(path = "Category.do", method = RequestMethod.GET)
+	public ModelAndView findCategory(Film f) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("view");
+		String category = dao.findCategoryByFilmId(f.getId()); 
+		mv.addObject("category", category);
+		mv.addObject("film", f);
+		return mv;
+	}
+	
+	@RequestMapping(path = "Actors.do", method = RequestMethod.GET)
+	public ModelAndView findActors(Film f) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("view");
+		List<Actor> actors = dao.getActorsByFilmId(f.getId()); 
+		mv.addObject("actors", actors);
 		return mv;
 	}
 

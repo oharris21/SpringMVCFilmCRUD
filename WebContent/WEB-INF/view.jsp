@@ -77,11 +77,18 @@
 			<td>${film.language}</td>
 		</tr>
 		<tr>
-			<td>Actor List:</td>
-			<td><form action="actorList.jsp" method="GET">
-					<input type="submit" value="List Actors" />
-				</form></td>
+			<td><form action="Category.do" method="get"></form>Category:</td>
+			<td>${category}</td>
 		</tr>
+		<%-- <tr>
+			<td><form action="Actors.do" method="get"></form>Actors:</td>
+			<td>
+				<c:forEach var="a" items="${actor}">
+					<tr>
+						<td>${a}</td>
+					</tr>
+				</c:forEach></td>
+		</tr> --%>
 
 	</table>
 

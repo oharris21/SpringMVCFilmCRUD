@@ -84,6 +84,10 @@ public class FilmDAOImpl implements FilmDAO {
 				String language = rs.getString(12);
 				Film film = new Film(filmId, title, desc, releaseYear, langId, rentDur, rate, length, repCost, rating,
 						features, language);
+				
+				// Call our other method to retrieve the category and 
+				// set it for our object before adding it to the list
+				film.setCategory(findCategoryByFilmId(filmId));
 				films.add(film);
 			}
 			rs.close();
@@ -264,6 +268,7 @@ public class FilmDAOImpl implements FilmDAO {
 		return film;
 	}
 	
+	@Override
 	public String findCategoryByFilmId (int filmId) {
 		String category = null;
 		try {

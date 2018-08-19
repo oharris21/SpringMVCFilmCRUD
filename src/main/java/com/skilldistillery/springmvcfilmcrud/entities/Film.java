@@ -21,6 +21,10 @@ public class Film {
 
 	// list of actors is not present in the constructor or toString
 	private List<Actor> actors = new ArrayList<>();
+	
+	// retrieve category with FilmDAOImpl.java/findCategoryByFilmId()
+	// method
+	private String category;
 
 	public Film() {
 
@@ -42,6 +46,14 @@ public class Film {
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
 		this.language = language;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public int getId() {

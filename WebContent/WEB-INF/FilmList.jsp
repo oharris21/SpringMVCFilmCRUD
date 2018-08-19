@@ -40,6 +40,7 @@
 						<input type="hidden" name="replacementCost" value="${f.replacementCost}">
 						<input type="hidden" name="specialFeatures" value="${f.specialFeatures}"> 
 						<input type="hidden" name="title" value="${f.title}">
+						<input type="hidden" name="category" value="${f.category}">
 					</form>
 				</td>
 				<td>

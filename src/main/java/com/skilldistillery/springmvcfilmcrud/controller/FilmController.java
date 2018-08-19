@@ -38,7 +38,15 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 
 		mv.setViewName("view");
-		mv.addObject("film", dao.searchFilmById(id));
+		
+		// Create film object using passed in id value
+		Film film = dao.searchFilmById(id);
+		
+		// Set the category instance variable for the film object by calling
+		// FilmDAOImpl.java/findCategoryByFilmId() method
+		film.setCategory(dao.findCategoryByFilmId(id));
+		
+		mv.addObject("film", film);
 
 		return mv;
 	}
@@ -64,15 +72,24 @@ public class FilmController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "Category.do", method = RequestMethod.GET)
-	public ModelAndView findCategory(Film f) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("view");
-		String category = dao.findCategoryByFilmId(f.getId()); 
-		mv.addObject("category", category);
-		mv.addObject("film", f);
-		return mv;
-	}
+	// Richard's Message: I don't think we need this method. I got category
+	// working by creating an instance variable field for category in the
+	// film object itself. This field has getters/setters for category.
+	// In the FilmDAOImpl.java class, the methods which create a film
+	// objects, namely, searchByKeyword() and searchById(), will also
+	// call the other method you created which returns a category string
+	// and it will add that category string to the film object by calling
+	// the film object's setter method for category. I just pass in the
+	// method for the setter which will retrieve the category string.
+//	@RequestMapping(path = "Category.do", method = RequestMethod.GET)
+//	public ModelAndView findCategory(Film f) {
+//		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("view");
+//		String category = dao.findCategoryByFilmId(f.getId()); 
+//		mv.addObject("category", category);
+//		mv.addObject("film", f);
+//		return mv;
+//	}
 	
 	@RequestMapping(path = "Actors.do", method = RequestMethod.GET)
 	public ModelAndView findActors(Film f) {

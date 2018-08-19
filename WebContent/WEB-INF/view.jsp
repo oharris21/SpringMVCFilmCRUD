@@ -77,9 +77,13 @@
 			<td>${film.language}</td>
 		</tr>
 		<tr>
+			<td>Category:</td>
+			<td>${film.category}</td>
+		</tr>
+	<%-- 	<tr>
 			<td><form action="Category.do" method="get"></form>Category:</td>
 			<td>${category}</td>
-		</tr>
+		</tr> --%>
 		<%-- <tr>
 			<td><form action="Actors.do" method="get"></form>Actors:</td>
 			<td>

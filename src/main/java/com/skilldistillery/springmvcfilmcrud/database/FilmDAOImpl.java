@@ -96,18 +96,14 @@ public class FilmDAOImpl implements FilmDAO {
 		return films;
 	}
 
-	public Boolean editFilm(Film f) {
+	public boolean editFilm(Film f) {
+		Connection conn = null;
 		Boolean edit = false;
-		String sql = "UPDATE film\n" + "SET id = ?, " + "SET title = ?, " + "SET description = ?, "
-				+ "SET release_year = ?, " + "SET language_id = ?, " + "SET rental_duration = ?, "
-				+ "SET rental_rate = ?, " + "SET length = ?, " + "SET replacement_cost = ?, " + "SET rating = ?, "
-				+ "SET special_features = ?, " + "SET language = ?, " + "WHERE id = ?, " + "WHERE title = ?, "
-				+ "WHERE description = ?, " + "WHERE release_year = ?, " + "WHERE language_id = ?, "
-				+ "WHERE rental_duration = ?, " + "WHERE rental_rate = ?, " + "WHERE length = ?, "
-				+ "WHERE replacement_cost = ?, " + "WHERE rating = ?, " + "WHERE special_features = ?, "
-				+ "WHERE language = ?, ";
+		String sql = "update film set id = ?, title = ?, description = ?, release_year = ?, language_id = ?, "
+				+ "rental_duration = ?, rental_rate = ?, length = ?, replacement_cost = ?, rating = ?, special_features = ? "
+				+ "where id = ?; ";
 		try {
-			Connection conn = DriverManager.getConnection(url, user, pass);
+			conn = DriverManager.getConnection(url, user, pass);
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, f.getId());
 			stmt.setString(2, f.getTitle());
@@ -119,8 +115,7 @@ public class FilmDAOImpl implements FilmDAO {
 			stmt.setInt(8, f.getLength());
 			stmt.setDouble(9, f.getReplacementCost());
 			stmt.setString(10, f.getRating());
-			stmt.setString(11, f.getSpecialFeatures());
-			stmt.setString(12, f.getLanguage());
+			stmt.setInt(11, Integer.parseInt(f.getSpecialFeatures()));
 			int rowsAffected = stmt.executeUpdate();
 			if (rowsAffected > 0) {
 				edit = true;
@@ -131,6 +126,13 @@ public class FilmDAOImpl implements FilmDAO {
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException e2) {
+					System.err.println("Error trying to rollback");
+				}
+			}
 		}
 		return edit;
 	}

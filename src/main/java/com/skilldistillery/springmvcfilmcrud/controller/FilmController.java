@@ -62,8 +62,9 @@ public class FilmController {
 	@RequestMapping(path = "Edit.do", method = RequestMethod.POST)
 	public ModelAndView editFilm(Film f) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("EditFilm");
-		mv.addObject("film", f);
+		mv.setViewName("confirmationEdit");
+		mv.addObject("editBoolean", dao.editFilm(f));
+		mv.addObject("film", f); 
 		// calls method in FilmDAOImpl that edits film
 		return mv;
 	}

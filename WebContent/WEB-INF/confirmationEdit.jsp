@@ -5,22 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SpringMVCFilmCrud Project | Film Details</title>
+<title>SpringMVCFilmCrud | Edit Confirmation</title>
 </head>
 <body>
+	<h2>SpringMVCFilmCrud | Edit Confirmation</h2>
+	<c:choose>
+		<c:when test="${booleanEdit}">
+			Edit successful
+		</c:when>
+		<c:otherwise>
+			Edit failed
+		</c:otherwise>
+	</c:choose>
 
-	<h2>SpringMVCFilmCrud Project | Film Details</h2>
-
-	<!-- This will print a "successful" header when a user adds a film
-	followed by the film details, so that the user will know that a film
-	was added successfully (when they use the addFilm.html form inputs -->
-	<c:if test="${! empty successful}">
-		<h2>${successful}</h2>
-	</c:if>
-	<!--  Same as above except for failure -->
-	<c:if test="${! empty failed}">
-		<h2>${failed}</h2>
-	</c:if>
 
 	<table>
 
@@ -84,6 +81,7 @@
 		</tr>
 
 	</table>
+
 
 </body>
 </html>

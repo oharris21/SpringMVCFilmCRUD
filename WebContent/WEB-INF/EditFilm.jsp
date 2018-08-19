@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h2>Edit a Film</h2>
+	<form action="Edit.do" method="POST">
 	<table>
 		<tr>
 			<td><label for="title">Title:</label></td>
@@ -53,11 +54,8 @@
 			<td><label for="specialFeatures">Special Features:</label></td>
 			<td><input type="text" name="specialFeatures" placeholder="${film.specialFeatures}"/></td>
 		</tr>
-		<tr>
-			<td><label for="language">Language:</label></td>
-			<td><input type="text" name="language" placeholder="${film.language}"/></td>
-		</tr>
 	</table>
 	<input type="submit" value="Submit">
+	</form>
 </body>
 </html>

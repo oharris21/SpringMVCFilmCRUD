@@ -11,8 +11,8 @@
 	<form action="Edit.do" method="POST">
 		<table>
 			<tr>
-				<td><label for="id">Film ID:</label></td>
-				<td><input type="text" name="id" value="${film.id}" /></td>
+				<!-- <td><label for="id">Film ID:</label></td> -->
+				<td><input type="hidden" name="id" value="${film.id}" /></td>
 			</tr>
 			<tr>
 				<td><label for="title">Title:</label></td>

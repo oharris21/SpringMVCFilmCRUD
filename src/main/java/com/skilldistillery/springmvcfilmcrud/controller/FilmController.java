@@ -36,7 +36,6 @@ public class FilmController {
 	@RequestMapping(path = "searchFilmById.do", params = "searchFilmById", method = RequestMethod.GET)
 	public ModelAndView searchFilmById(@RequestParam("searchFilmById") int id) {
 		ModelAndView mv = new ModelAndView();
-
 		mv.setViewName("view");
 		
 		// Create film object using passed in id value
@@ -46,9 +45,7 @@ public class FilmController {
 		// FilmDAOImpl.java/findCategoryByFilmId() method
 		film.setCategory(dao.findCategoryByFilmId(id));
 		film.setActors(dao.getActorsByFilmId(id));
-		
 		mv.addObject("film", film);
-
 		return mv;
 	}
 
@@ -73,31 +70,6 @@ public class FilmController {
 		mv.addObject("film", f);
 		return mv;
 	}
-	
-//	*** OWEN'S WORK AND METHODS - TO BE DELETED? ***
-	// Richard's Message: Don't think we need these anymore. But you let me
-	// know whether you're ok with deleting them. If so, then go ahead
-	// and delete them. I didn't want to delete your work without you
-	// looking over the changes.
-//	@RequestMapping(path = "Category.do", method = RequestMethod.GET)
-//	public ModelAndView findCategory(Film f) {
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("view");
-//		String category = dao.findCategoryByFilmId(f.getId()); 
-//		mv.addObject("category", category);
-//		mv.addObject("film", f);
-//		return mv;
-//	}
-	
-//	@RequestMapping(path = "Actors.do", method = RequestMethod.GET)
-//	public ModelAndView findActors(Film f) {
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("view");
-//		List<Actor> actors = dao.getActorsByFilmId(f.getId()); 
-//		mv.addObject("actors", actors);
-//		return mv;
-//	}
-//	*** END OF BLOCK - TO BE DELETED? ***
 
 	// CORRESPONDS TO *EditFilm.jsp*
 	@RequestMapping(path = "Edit.do", method = RequestMethod.POST)

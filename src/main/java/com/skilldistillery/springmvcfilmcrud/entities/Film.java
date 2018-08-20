@@ -22,6 +22,13 @@ public class Film {
 	// list of actors is not present in the constructor or toString
 	private List<Actor> actors = new ArrayList<>();
 	
+	public void printActors(List<Actor> actors) {
+		for (Actor a : actors) {
+			a.getFirstName(); 
+			a.getLastName(); 
+		}
+	}
+	
 	// retrieve category with FilmDAOImpl.java/findCategoryByFilmId()
 	// method
 	private String category;

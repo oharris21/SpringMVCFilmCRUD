@@ -52,10 +52,10 @@ public class Actor {
 		this.films = films;
 	}
 
-	@Override
-	public String toString() {
-		return id + ", " + firstName + ", " + lastName + "\n";
-	}
+//	@Override
+//	public String toString() {
+//		return id + ", " + firstName + ", " + lastName + "\n";
+//	}
 
 	@Override
 	public int hashCode() {

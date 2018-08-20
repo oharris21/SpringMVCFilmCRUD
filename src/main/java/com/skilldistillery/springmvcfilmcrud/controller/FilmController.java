@@ -78,6 +78,8 @@ public class FilmController {
 		mv.setViewName("confirmationEdit");
 		boolean editFilm = dao.editFilm(f);
 		mv.addObject("editBoolean", editFilm);
+		f.setCategory(dao.findCategoryByFilmId(f.getId()));
+		f.setActors(dao.getActorsByFilmId(f.getId()));
 		mv.addObject("film", f);
 		return mv;
 	}

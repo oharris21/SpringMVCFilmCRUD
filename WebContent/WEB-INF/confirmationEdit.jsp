@@ -70,14 +70,29 @@
 			<td>${film.specialFeatures}</td>
 		</tr>
 		<tr>
-			<td>Actor List:</td>
-			<td><form action="actorList.jsp" method="GET">
-					<input type="submit" value="List Actors" />
-				</form></td>
+			<td>Category:</td>
+			<td>${film.category}</td>
 		</tr>
-
 	</table>
-
+	<br>
+	<br>
+	<table>
+		<tr>
+			<th colspan="3"><h3>${film.title} CAST</h3></th>
+		</tr>
+		<tr>
+			<th>Actor ID</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+		</tr>
+		<c:forEach var="a" items="${film.actors}">
+			<tr>
+				<td>${a.id}</td>
+				<td>${a.firstName}</td>
+				<td>${a.lastName}</td>
+			</tr>
+		</c:forEach>
+	</table>
 
 </body>
 </html>

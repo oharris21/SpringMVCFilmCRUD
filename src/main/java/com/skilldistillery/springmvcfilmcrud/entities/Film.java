@@ -47,7 +47,7 @@ public class Film {
 		this.specialFeatures = specialFeatures;
 		this.language = language;
 	}
-
+	
 	public String getCategory() {
 		return category;
 	}
@@ -155,11 +155,11 @@ public class Film {
 	public List<Actor> getActors() {
 		return actors;
 	}
-
+	
 	public void setActors(List<Actor> actors) {
 		this.actors = actors;
 	}
-
+	
 //	@Override
 //	public String toString() {
 //		return "Film [id=" + id + "<br>title=" + title + "<br>description=" + description + "<br>releaseYear=" + releaseYear

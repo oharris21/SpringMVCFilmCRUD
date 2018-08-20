@@ -80,19 +80,10 @@
 			<td>Category:</td>
 			<td>${film.category}</td>
 		</tr>
-	<%-- 	<tr>
-			<td><form action="Category.do" method="get"></form>Category:</td>
-			<td>${category}</td>
-		</tr> --%>
-		<%-- <tr>
-			<td><form action="Actors.do" method="get"></form>Actors:</td>
-			<td>
-				<c:forEach var="a" items="${actor}">
-					<tr>
-						<td>${a}</td>
-					</tr>
-				</c:forEach></td>
-		</tr> --%>
+		<tr>
+			<td>Actor Cast:</td>
+			<td>${film.actors}</td>
+		</tr>
 
 	</table>
 

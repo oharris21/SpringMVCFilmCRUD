@@ -45,6 +45,7 @@ public class FilmController {
 		// Set the category instance variable for the film object by calling
 		// FilmDAOImpl.java/findCategoryByFilmId() method
 		film.setCategory(dao.findCategoryByFilmId(id));
+		film.setActors(dao.getActorsByFilmId(id));
 		
 		mv.addObject("film", film);
 
@@ -68,19 +69,16 @@ public class FilmController {
 	public ModelAndView filmDetails(Film f) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("view");
+		f.setActors(dao.getActorsByFilmId(f.getId()));
 		mv.addObject("film", f);
 		return mv;
 	}
 	
-	// Richard's Message: I don't think we need this method. I got category
-	// working by creating an instance variable field for category in the
-	// film object itself. This field has getters/setters for category.
-	// In the FilmDAOImpl.java class, the methods which create a film
-	// objects, namely, searchByKeyword() and searchById(), will also
-	// call the other method you created which returns a category string
-	// and it will add that category string to the film object by calling
-	// the film object's setter method for category. I just pass in the
-	// method for the setter which will retrieve the category string.
+//	*** OWEN'S WORK AND METHODS - TO BE DELETED? ***
+	// Richard's Message: Don't think we need these anymore. But you let me
+	// know whether you're ok with deleting them. If so, then go ahead
+	// and delete them. I didn't want to delete your work without you
+	// looking over the changes.
 //	@RequestMapping(path = "Category.do", method = RequestMethod.GET)
 //	public ModelAndView findCategory(Film f) {
 //		ModelAndView mv = new ModelAndView();
@@ -91,14 +89,15 @@ public class FilmController {
 //		return mv;
 //	}
 	
-	@RequestMapping(path = "Actors.do", method = RequestMethod.GET)
-	public ModelAndView findActors(Film f) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("view");
-		List<Actor> actors = dao.getActorsByFilmId(f.getId()); 
-		mv.addObject("actors", actors);
-		return mv;
-	}
+//	@RequestMapping(path = "Actors.do", method = RequestMethod.GET)
+//	public ModelAndView findActors(Film f) {
+//		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("view");
+//		List<Actor> actors = dao.getActorsByFilmId(f.getId()); 
+//		mv.addObject("actors", actors);
+//		return mv;
+//	}
+//	*** END OF BLOCK - TO BE DELETED? ***
 
 	// CORRESPONDS TO *EditFilm.jsp*
 	@RequestMapping(path = "Edit.do", method = RequestMethod.POST)

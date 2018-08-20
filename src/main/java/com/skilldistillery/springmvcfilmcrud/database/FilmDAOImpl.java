@@ -88,6 +88,7 @@ public class FilmDAOImpl implements FilmDAO {
 				// Call our other method to retrieve the category and 
 				// set it for our object before adding it to the list
 				film.setCategory(findCategoryByFilmId(filmId));
+				film.setActors(getActorsByFilmId(filmId));
 				films.add(film);
 			}
 			rs.close();

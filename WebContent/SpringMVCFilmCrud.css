@@ -1,0 +1,21 @@
+.header {
+  background-color: black;
+  color: white;
+  font-family: "helvetica" !important;
+  text-align: center;
+}
+
+body {
+  background-image: url("https://getreelcinemas.com//wp-content/uploads/2015/02/Background-Narrow.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.list {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  left: 550px;
+  top: 150px;
+  color: white;
+}
